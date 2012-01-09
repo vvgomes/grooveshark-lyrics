@@ -1,6 +1,6 @@
 var played = 0;
 
-var songInfo = function(){
+var songInfo = function() {
   if (typeof Grooveshark === 'undefined' || !Grooveshark._lastStatus) {
     return null;
   }
@@ -47,16 +47,16 @@ var adjustStyles = function(){
 		
 		$.ajax({
 	    	url: 'http://lyrics-service.herokuapp.com/?music='+encodeURIComponent(currentSong.music)+'&artist='+encodeURIComponent(currentSong.artist),
+				//url: 'http://localhost:3000/?music='+encodeURIComponent(currentSong.music)+'&artist='+encodeURIComponent(currentSong.artist),
 	    	dataType: 'jsonp',
 	    	crossDomain: true,
 	    	jsonp: false,
 	    	jsonpCallback: 'result',
 	    	success: function(data) {
-	      		$('#capitalPane').html(data.lyrics);
-	      		$('#capitalPane p').css('margin', '10px');
-	      		$('#capital_header').html('<p>'+ data.artist + '</p><p><b>' + data.music + '</b></p>');
-	      		$('#capital_header > p').css('text-align', 'center');
-	      		$('#capital_header p:first').css('padding-top', '5px');
+					var place = 'div#page_content_profile div.content';
+					$(place).html('<h2>'+ data.artist + '</h2><h3><b>' + data.music + '</b></h3><p>'+data.lyrics+'</p>');
+					$(place).css('margin', '10px');
+					$(place).css('border', 'solid 2px grey');
 	    	}
 		});	
 
